@@ -1,4 +1,3 @@
-#membuat dictionary berisi daftar menu
 menu = {
     "\nmangane dek": "",
     "mie gacoan lv.(1-4)": 10000,
@@ -19,17 +18,14 @@ menu = {
     "es tengklek": 6000
 }
 
-#variabel untuk menyimpan pesanan
 pesanan = []
 
-#fungsi untuk menampilkan menu
 def tampilkan_menu():
     print("\n=========== Menu Gacoan ===========")
     for item, harga in menu.items():
         print(f"{item.capitalize()}: Rp{harga}" if harga else item.capitalize())
     print("="*40)
 
-#fungsi untuk membuat atau menambah pesanan
 def tambah_pesanan(item, jumlah):
     item_input = item.lower() 
     if item_input in menu:
@@ -39,7 +35,6 @@ def tambah_pesanan(item, jumlah):
         print("maaf menu yang di pesan tidak tersedia. Silakan pilih dari menu berikut:")
         tampilkan_menu()
 
-#fungsi untuk menghapus pesanan
 def hapus_pesanan(nomer):
     if 0 <= nomer < len(pesanan):
         item = pesanan[nomer]
@@ -48,13 +43,11 @@ def hapus_pesanan(nomer):
     else:
         print("nomer pesanan tidak valid")
 
-#fungsi untuk mengubah pesanan
 def ubah_pesanan(nomer, jumlah_baru, level_baru=None):
     if 0 <= nomer < len(pesanan):
         item = pesanan[nomer][0]
         item_name = item.lower()
 
-        # Jika item adalah mie gacoan atau mie hompimpa, ubah level
         if "mie gacoan" in item_name:
             if 1 <= level_baru <= 4:
                 item = "mie gacoan lv.(1-4)"
@@ -72,13 +65,11 @@ def ubah_pesanan(nomer, jumlah_baru, level_baru=None):
                 print("Level tidak tersedia!!!")
                 return
 
-        # Update pesanan dengan level baru dan harga yang sesuai
         pesanan[nomer] = (item, jumlah_baru, menu[item])
         print(f"Pesanan {item.capitalize()} diperbarui menjadi {jumlah_baru} porsi")
     else:
         print("nomer pesanan tidak valid")
 
-#fungsi untuk menampilkan pesanan
 def tampilkan_pesanan():
     print("\n=========== Daftar Pesanan =============")
     for i in range(len(pesanan)):
@@ -86,7 +77,6 @@ def tampilkan_pesanan():
         print(f"{i + 1}. {item.capitalize()} (x{jumlah}): Rp{harga * jumlah}")
     print("="*40)
 
-#fungsi untuk menghitung total harga
 def hitung_total():
     total = 0
     for item, jumlah, harga in pesanan:
@@ -108,7 +98,6 @@ def hitung_total():
 
     return total, diskon, total_diskon, total_setelah_diskon
 
-#fungsi untuk membuat struk pembelian
 def cetak_struk():
     if len(pesanan) == 0:  
         print("Tidak ada pesanan untuk dicetak")
@@ -122,7 +111,6 @@ def cetak_struk():
     print(f"Total Diskon: Rp{total_diskon}")
     print(f"Total Setelah Diskon: Rp{total_setelah_diskon}")
     
-    # Input pembayaran dari pengguna
     while True:
         pembayaran = int(input("Masukkan jumlah uang pembayaran: Rp"))
         if pembayaran < total_setelah_diskon:
@@ -216,5 +204,4 @@ def main():
         else:
             print("Kode tidak valid, Silakan coba lagi")
 
-# Menjalankan program
 main()
